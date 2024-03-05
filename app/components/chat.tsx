@@ -520,19 +520,20 @@ export function ChatActions(props: {
         }
       />
 
-      <ChatAction
-        onClick={props.showPromptHints}
-        text={Locale.Chat.InputActions.Prompt}
-        icon={<PromptIcon />}
-      />
+      {/*TODO 以后放出来*/}
+      {/*<ChatAction*/}
+      {/*  onClick={props.showPromptHints}*/}
+      {/*  text={Locale.Chat.InputActions.Prompt}*/}
+      {/*  icon={<PromptIcon />}*/}
+      {/*/>*/}
 
-      <ChatAction
-        onClick={() => {
-          navigate(Path.Masks);
-        }}
-        text={Locale.Chat.InputActions.Masks}
-        icon={<MaskIcon />}
-      />
+      {/*<ChatAction*/}
+      {/*  onClick={() => {*/}
+      {/*    navigate(Path.Masks);*/}
+      {/*  }}*/}
+      {/*  text={Locale.Chat.InputActions.Masks}*/}
+      {/*  icon={<MaskIcon />}*/}
+      {/*/>*/}
 
       <ChatAction
         text={Locale.Chat.InputActions.Clear}
@@ -549,11 +550,11 @@ export function ChatActions(props: {
         }}
       />
 
-      <ChatAction
-        onClick={() => setShowModelSelector(true)}
-        text={currentModel}
-        icon={<RobotIcon />}
-      />
+      {/*<ChatAction*/}
+      {/*  onClick={() => setShowModelSelector(true)}*/}
+      {/*  text={currentModel}*/}
+      {/*  icon={<RobotIcon />}*/}
+      {/*/>*/}
 
       {showModelSelector && (
         <Selector
@@ -1100,11 +1101,13 @@ function _Chat() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   const handlePaste = useCallback(
     async (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
       const currentModel = chatStore.currentSession().mask.modelConfig.model;
-      if(!isVisionModel(currentModel)){return;}
+      if (!isVisionModel(currentModel)) {
+        return;
+      }
       const items = (event.clipboardData || window.clipboardData).items;
       for (const item of items) {
         if (item.kind === "file" && item.type.startsWith("image/")) {
@@ -1215,38 +1218,28 @@ function _Chat() {
           </div>
         </div>
         <div className="window-actions">
-          {!isMobileScreen && (
-            <div className="window-action-button">
-              <IconButton
-                icon={<RenameIcon />}
-                bordered
-                onClick={() => setIsEditingMessage(true)}
-              />
-            </div>
-          )}
+          {/*TODO 以后放出来*/}
+          {/*{!isMobileScreen && (*/}
+          {/*  <div className="window-action-button">*/}
+          {/*    <IconButton*/}
+          {/*      icon={<RenameIcon />}*/}
+          {/*      bordered*/}
+          {/*      onClick={() => setIsEditingMessage(true)}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*)}*/}
           <div className="window-action-button">
             <IconButton
               icon={<ExportIcon />}
               bordered
               title={Locale.Chat.Actions.Export}
               onClick={() => {
-                setShowExport(true);
+                alert("导出对话功能开发中。");
+                // TODO 以后放出来
+                // setShowExport(true);
               }}
             />
           </div>
-          {showMaxIcon && (
-            <div className="window-action-button">
-              <IconButton
-                icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
-                bordered
-                onClick={() => {
-                  config.update(
-                    (config) => (config.tightBorder = !config.tightBorder),
-                  );
-                }}
-              />
-            </div>
-          )}
         </div>
 
         <PromptToast
@@ -1287,40 +1280,41 @@ function _Chat() {
                 <div className={styles["chat-message-container"]}>
                   <div className={styles["chat-message-header"]}>
                     <div className={styles["chat-message-avatar"]}>
-                      <div className={styles["chat-message-edit"]}>
-                        <IconButton
-                          icon={<EditIcon />}
-                          onClick={async () => {
-                            const newMessage = await showPrompt(
-                              Locale.Chat.Actions.Edit,
-                              getMessageTextContent(message),
-                              10,
-                            );
-                            let newContent: string | MultimodalContent[] =
-                              newMessage;
-                            const images = getMessageImages(message);
-                            if (images.length > 0) {
-                              newContent = [{ type: "text", text: newMessage }];
-                              for (let i = 0; i < images.length; i++) {
-                                newContent.push({
-                                  type: "image_url",
-                                  image_url: {
-                                    url: images[i],
-                                  },
-                                });
-                              }
-                            }
-                            chatStore.updateCurrentSession((session) => {
-                              const m = session.mask.context
-                                .concat(session.messages)
-                                .find((m) => m.id === message.id);
-                              if (m) {
-                                m.content = newContent;
-                              }
-                            });
-                          }}
-                        ></IconButton>
-                      </div>
+                      {/*TODO 以后放出来*/}
+                      {/*<div className={styles["chat-message-edit"]}>*/}
+                      {/*  <IconButton*/}
+                      {/*    icon={<EditIcon />}*/}
+                      {/*    onClick={async () => {*/}
+                      {/*      const newMessage = await showPrompt(*/}
+                      {/*        Locale.Chat.Actions.Edit,*/}
+                      {/*        getMessageTextContent(message),*/}
+                      {/*        10,*/}
+                      {/*      );*/}
+                      {/*      let newContent: string | MultimodalContent[] =*/}
+                      {/*        newMessage;*/}
+                      {/*      const images = getMessageImages(message);*/}
+                      {/*      if (images.length > 0) {*/}
+                      {/*        newContent = [{ type: "text", text: newMessage }];*/}
+                      {/*        for (let i = 0; i < images.length; i++) {*/}
+                      {/*          newContent.push({*/}
+                      {/*            type: "image_url",*/}
+                      {/*            image_url: {*/}
+                      {/*              url: images[i],*/}
+                      {/*            },*/}
+                      {/*          });*/}
+                      {/*        }*/}
+                      {/*      }*/}
+                      {/*      chatStore.updateCurrentSession((session) => {*/}
+                      {/*        const m = session.mask.context*/}
+                      {/*          .concat(session.messages)*/}
+                      {/*          .find((m) => m.id === message.id);*/}
+                      {/*        if (m) {*/}
+                      {/*          m.content = newContent;*/}
+                      {/*        }*/}
+                      {/*      });*/}
+                      {/*    }}*/}
+                      {/*  ></IconButton>*/}
+                      {/*</div>*/}
                       {isUser ? (
                         <Avatar avatar={config.avatar} />
                       ) : (

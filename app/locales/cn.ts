@@ -72,7 +72,9 @@ const cn = {
       if (submitKey === String(SubmitKey.Enter)) {
         inputHints += "，Shift + Enter 换行";
       }
-      return inputHints + "，/ 触发补全，: 触发命令";
+      return inputHints;
+      // TODO 以后加回来
+      // return inputHints + "，/ 触发补全，: 触发命令";
     },
     Send: "发送",
     Config: {
@@ -82,7 +84,7 @@ const cn = {
     IsContext: "预设提示词",
   },
   Export: {
-    Title: "分享聊天记录",
+    Title: "导出聊天记录",
     Copy: "全部复制",
     Download: "下载文件",
     Share: "分享到 ShareGPT",
