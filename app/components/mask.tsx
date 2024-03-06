@@ -113,30 +113,6 @@ export function MaskConfig(props: {
       />
 
       <List>
-        <ListItem title={Locale.Mask.Config.Avatar}>
-          <Popover
-            content={
-              <AvatarPicker
-                onEmojiClick={(emoji) => {
-                  props.updateMask((mask) => (mask.avatar = emoji));
-                  setShowPicker(false);
-                }}
-              ></AvatarPicker>
-            }
-            open={showPicker}
-            onClose={() => setShowPicker(false)}
-          >
-            <div
-              onClick={() => setShowPicker(true)}
-              style={{ cursor: "pointer" }}
-            >
-              <MaskAvatar
-                avatar={props.mask.avatar}
-                model={props.mask.modelConfig.model}
-              />
-            </div>
-          </Popover>
-        </ListItem>
         <ListItem title={Locale.Mask.Config.Name}>
           <input
             type="text"
@@ -148,61 +124,6 @@ export function MaskConfig(props: {
             }
           ></input>
         </ListItem>
-        <ListItem
-          title={Locale.Mask.Config.HideContext.Title}
-          subTitle={Locale.Mask.Config.HideContext.SubTitle}
-        >
-          <input
-            type="checkbox"
-            checked={props.mask.hideContext}
-            onChange={(e) => {
-              props.updateMask((mask) => {
-                mask.hideContext = e.currentTarget.checked;
-              });
-            }}
-          ></input>
-        </ListItem>
-
-        {!props.shouldSyncFromGlobal ? (
-          <ListItem
-            title={Locale.Mask.Config.Share.Title}
-            subTitle={Locale.Mask.Config.Share.SubTitle}
-          >
-            <IconButton
-              icon={<CopyIcon />}
-              text={Locale.Mask.Config.Share.Action}
-              onClick={copyMaskLink}
-            />
-          </ListItem>
-        ) : null}
-
-        {props.shouldSyncFromGlobal ? (
-          <ListItem
-            title={Locale.Mask.Config.Sync.Title}
-            subTitle={Locale.Mask.Config.Sync.SubTitle}
-          >
-            <input
-              type="checkbox"
-              checked={props.mask.syncGlobalConfig}
-              onChange={async (e) => {
-                const checked = e.currentTarget.checked;
-                if (
-                  checked &&
-                  (await showConfirm(Locale.Mask.Config.Sync.Confirm))
-                ) {
-                  props.updateMask((mask) => {
-                    mask.syncGlobalConfig = checked;
-                    mask.modelConfig = { ...globalConfig.modelConfig };
-                  });
-                } else if (!checked) {
-                  props.updateMask((mask) => {
-                    mask.syncGlobalConfig = checked;
-                  });
-                }
-              }}
-            ></input>
-          </ListItem>
-        ) : null}
       </List>
 
       <List>
@@ -372,27 +293,6 @@ export function ContextPrompts(props: {
             )}
           </Droppable>
         </DragDropContext>
-
-        {props.context.length === 0 && (
-          <div className={chatStyle["context-prompt-row"]}>
-            <IconButton
-              icon={<AddIcon />}
-              text={Locale.Context.Add}
-              bordered
-              className={chatStyle["context-prompt-button"]}
-              onClick={() =>
-                addContextPrompt(
-                  createMessage({
-                    role: "user",
-                    content: "",
-                    date: "",
-                  }),
-                  props.context.length,
-                )
-              }
-            />
-          </div>
-        )}
       </div>
     </>
   );
