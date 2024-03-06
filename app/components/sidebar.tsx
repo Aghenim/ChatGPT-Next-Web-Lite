@@ -5,7 +5,8 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
-import AiIcon from "../icons/ai.svg";
+import Image from "next/image";
+import AiIcon from "../icons/ai.png";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
 import DeleteIcon from "../icons/delete.svg";
@@ -159,7 +160,7 @@ export function SideBar(props: { className?: string }) {
         </div>
         <div className={styles["sidebar-sub-title"]}>万徳易通AI助手</div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
-          <AiIcon />
+          <Image src={AiIcon} alt="AiIcon" width={44} height={44} />
         </div>
       </div>
       <div
