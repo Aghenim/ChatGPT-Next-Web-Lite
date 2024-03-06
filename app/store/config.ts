@@ -39,7 +39,7 @@ export const DEFAULT_CONFIG = {
 
   disablePromptHint: false,
 
-  // 以后放出来
+  // TODO 以后放出来
   dontShowMaskSplashScreen: true, // dont show splash screen when create chat
   hideBuiltinMasks: false, // dont add builtin masks
 
